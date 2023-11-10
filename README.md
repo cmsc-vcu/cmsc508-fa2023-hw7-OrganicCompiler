@@ -1,1 +1,3 @@
-# cmsc508-fa2023-hw7-template
+# Homework 7
+
+This repository contains all of my work that went towards my hw7 submission to canvas and gradescope. 
