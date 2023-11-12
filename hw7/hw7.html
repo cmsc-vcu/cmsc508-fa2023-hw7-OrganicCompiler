@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yonathan Menberu">
-<meta name="dcterms.date" content="2023-11-10">
+<meta name="dcterms.date" content="2023-11-12">
 
 <title>Homework 7 - Creating a resume database</title>
 <style>
@@ -20,40 +20,6 @@ ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
 width: 0.8em;
 margin: 0 0.8em 0.2em -1em;  vertical-align: middle;
-}
-
-pre > code.sourceCode { white-space: pre; position: relative; }
-pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
-pre > code.sourceCode > span:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode > span { color: inherit; text-decoration: inherit; }
-div.sourceCode { margin: 1em 0; }
-pre.sourceCode { margin: 0; }
-@media screen {
-div.sourceCode { overflow: auto; }
-}
-@media print {
-pre > code.sourceCode { white-space: pre-wrap; }
-pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
-}
-pre.numberSource code
-{ counter-reset: source-line 0; }
-pre.numberSource code > span
-{ position: relative; left: -4em; counter-increment: source-line; }
-pre.numberSource code > span > a:first-child::before
-{ content: counter(source-line);
-position: relative; left: -1em; text-align: right; vertical-align: baseline;
-border: none; display: inline-block;
--webkit-touch-callout: none; -webkit-user-select: none;
--khtml-user-select: none; -moz-user-select: none;
--ms-user-select: none; user-select: none;
-padding: 0 4px; width: 4em;
-}
-pre.numberSource { margin-left: 3em; padding-left: 4px; }
-div.sourceCode
-{ }
-@media screen {
-pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -3319,16 +3285,16 @@ z-index: 1000;
    
   <ul>
   <li><a href="#overview-and-description" id="toc-overview-and-description" class="nav-link active" data-scroll-target="#overview-and-description">Overview and description</a></li>
-  <li><a href="#crows-foot-diagram" id="toc-crows-foot-diagram" class="nav-link" data-scroll-target="#crows-foot-diagram">Crows-foot diagram</a></li>
-  <li><a href="#examples-of-data-in-the-database" id="toc-examples-of-data-in-the-database" class="nav-link" data-scroll-target="#examples-of-data-in-the-database">Examples of data in the database</a>
+  <li><a href="#crows-foot-diagram" id="toc-crows-foot-diagram" class="nav-link" data-scroll-target="#crows-foot-diagram">Crows-Foot Diagram</a></li>
+  <li><a href="#data-in-the-users-database" id="toc-data-in-the-users-database" class="nav-link" data-scroll-target="#data-in-the-users-database">Data in the Users Database</a>
   <ul class="collapse">
   <li><a href="#people-table" id="toc-people-table" class="nav-link" data-scroll-target="#people-table">People table</a></li>
   <li><a href="#skills-table" id="toc-skills-table" class="nav-link" data-scroll-target="#skills-table">Skills table</a></li>
   <li><a href="#roles-table" id="toc-roles-table" class="nav-link" data-scroll-target="#roles-table">Roles table</a></li>
   </ul></li>
-  <li><a href="#sample-queries" id="toc-sample-queries" class="nav-link" data-scroll-target="#sample-queries">Sample queries</a></li>
-  <li><a href="#list-skill-names-tags-and-descriptions-ordered-by-name" id="toc-list-skill-names-tags-and-descriptions-ordered-by-name" class="nav-link" data-scroll-target="#list-skill-names-tags-and-descriptions-ordered-by-name">List skill names, tags, and descriptions ordered by name</a>
+  <li><a href="#sample-queries" id="toc-sample-queries" class="nav-link" data-scroll-target="#sample-queries">Sample queries</a>
   <ul class="collapse">
+  <li><a href="#list-skill-names-tags-and-descriptions-ordered-by-name" id="toc-list-skill-names-tags-and-descriptions-ordered-by-name" class="nav-link" data-scroll-target="#list-skill-names-tags-and-descriptions-ordered-by-name">List skill names, tags, and descriptions ordered by name</a></li>
   <li><a href="#list-people-names-and-email-addresses-ordered-by-last_name" id="toc-list-people-names-and-email-addresses-ordered-by-last_name" class="nav-link" data-scroll-target="#list-people-names-and-email-addresses-ordered-by-last_name">List people names and email addresses ordered by last_name</a></li>
   <li><a href="#list-skill-names-of-person-1" id="toc-list-skill-names-of-person-1" class="nav-link" data-scroll-target="#list-skill-names-of-person-1">List skill names of Person 1</a></li>
   <li><a href="#list-people-names-with-skill-6" id="toc-list-people-names-with-skill-6" class="nav-link" data-scroll-target="#list-people-names-with-skill-6">List people names with Skill 6</a></li>
@@ -3337,8 +3303,8 @@ z-index: 1000;
   <li><a href="#list-names-and-tags-of-unused-skills" id="toc-list-names-and-tags-of-unused-skills" class="nav-link" data-scroll-target="#list-names-and-tags-of-unused-skills">List names and tags of unused skills</a></li>
   <li><a href="#list-people-names-and-skill-names-with-the-boss-role" id="toc-list-people-names-and-skill-names-with-the-boss-role" class="nav-link" data-scroll-target="#list-people-names-and-skill-names-with-the-boss-role">List people names and skill names with the BOSS role</a></li>
   <li><a href="#list-ids-and-names-of-unused-roles" id="toc-list-ids-and-names-of-unused-roles" class="nav-link" data-scroll-target="#list-ids-and-names-of-unused-roles">List ids and names of unused roles</a></li>
-  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
   </ul></li>
+  <li><a href="#reflection" id="toc-reflection" class="nav-link" data-scroll-target="#reflection">Reflection</a></li>
   </ul>
 </nav>
 </div>
@@ -3363,7 +3329,7 @@ z-index: 1000;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 10, 2023</p>
+      <p class="date">November 12, 2023</p>
     </div>
   </div>
   
@@ -3373,57 +3339,79 @@ z-index: 1000;
 
 </header>
 
-<p>(include a brief description of what is in this document)</p>
-<p>(Please clean up any comments that I included. This is a scaffold document.)</p>
 <p>GITHUB URL: <a href="https://github.com/cmsc-vcu/cmsc508-fa2023-hw7-OrganicCompiler/tree/main" class="uri">https://github.com/cmsc-vcu/cmsc508-fa2023-hw7-OrganicCompiler/tree/main</a></p>
 <section id="overview-and-description" class="level2">
 <h2 class="anchored" data-anchor-id="overview-and-description">Overview and description</h2>
 <p>(briefly describe the project and the database)</p>
 </section>
 <section id="crows-foot-diagram" class="level2">
-<h2 class="anchored" data-anchor-id="crows-foot-diagram">Crows-foot diagram</h2>
-<p>(add a description of the diagram and what the reader is seeing.)</p>
+<h2 class="anchored" data-anchor-id="crows-foot-diagram">Crows-Foot Diagram</h2>
+<p>This ERD represents a relational database schema for managing information about people, their roles, and acquired skills. The key entities include “People,” each uniquely identified by an ID, with attributes such as name, contact information, and date of joining. People can hold multiple roles, as depicted by the “PeopleRoles” relationship, where roles have unique IDs and associated names and priorities. Additionally, people can acquire various skills, illustrated by the “PeopleSkills” relationship, connecting individuals to skills with unique IDs, names, descriptions, and associated details. The diagram emphasizes the relationships between people, roles, and skills, providing a comprehensive view of how these entities interconnect in the database schema.</p>
 <div class="cell">
 <div class="cell-output-display">
 <div>
 <div>
 <pre class="mermaid mermaid-js">erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
-    CUSTOMER{
-        int id
+    PEOPLE {
+        int id PK
         string first_name
         string last_name
+        string email
+        string linkedin_url
+        string headshot_url
+        string discord_handle
+        string brief_bio
+        string date_joined
     }
-    DELIVERY-ADDRESS {
-        int id
+
+    PEOPLEROLES {
+        int id PK
+        int people_id FK
+        int role_id FK
+        string date_assigned
     }
+
+    PEOPLESKILLS {
+        int id PK
+        int skill_id FK
+        int people_id FK
+        string date_acquired
+    }
+
+    ROLES {
+        int id PK
+        string name
+        inr sort_priority
+    }
+
+    SKILLS {
+        int id PK
+        string name
+        string description
+        string tag
+        string url
+        string time_commitment
+    }
+
+    SKILLS ||--|{ PEOPLESKILLS: uses
+    PEOPLE ||--|{ PEOPLESKILLS: acquires
+
+    PEOPLE ||--|{ PEOPLEROLES: holds
+    ROLES ||--|{ PEOPLEROLES: has
 </pre>
 </div>
 </div>
 </div>
 </div>
 </section>
-<section id="examples-of-data-in-the-database" class="level2">
-<h2 class="anchored" data-anchor-id="examples-of-data-in-the-database">Examples of data in the database</h2>
-<p>For the people, skills, and roles tables, provide a description of each table and it’s contents. Then provide a listing of the entire table.</p>
+<section id="data-in-the-users-database" class="level2">
+<h2 class="anchored" data-anchor-id="data-in-the-users-database">Data in the Users Database</h2>
 <section id="people-table" class="level3">
 <h3 class="anchored" data-anchor-id="people-table">People table</h3>
-<p>The <em>people</em> table contains elements that describe …</p>
+<p>The <em>people</em> table contains elements that describe individuals. Each person is identified by a unique integer ID, and their last name is a required field, ensuring that it cannot be null. Other optional details include the person’s first name, email, LinkedIn URL, headshot URL, Discord handle, and a brief biography. These details allow for a comprehensive representation of an individual’s profile. Additionally, the table records the date when each person joined, with this date being a mandatory field to ensure completeness in tracking the timeline of individuals’ memberships or affiliations.</p>
 <p>Below is a list of data in the <em>people</em> table.</p>
 <div class="cell" data-execution_count="5">
-<div class="cell-output cell-output-stdout">
-<pre><code>An error occurred:
-
-(pymysql.err.ProgrammingError) (1146, &quot;Table &#39;23FA_hr_menberuy.people&#39; doesn&#39;t exist&quot;)
-[SQL: 
-select * from people;
-]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-Ignoring and moving on.</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="14">
+<div class="cell-output cell-output-display" data-execution_count="19">
 <div>
 
 
@@ -3431,9 +3419,138 @@ Ignoring and moving on.</code></pre>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">first_name</th>
+<th data-quarto-table-cell-role="th">last_name</th>
+<th data-quarto-table-cell-role="th">email</th>
+<th data-quarto-table-cell-role="th">linkedin_url</th>
+<th data-quarto-table-cell-role="th">headshot_url</th>
+<th data-quarto-table-cell-role="th">discord_handle</th>
+<th data-quarto-table-cell-role="th">brief_bio</th>
+<th data-quarto-table-cell-role="th">date_joined</th>
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>John</td>
+<td>Person 1</td>
+<td>john.person1@email.com</td>
+<td>https://linkedin.com/in/johnperson1</td>
+<td>https://example.com/johnperson1.jpg</td>
+<td>johnperson1#1234</td>
+<td>Passionate developer with a love for coding.</td>
+<td>2023-01-01</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>Jane</td>
+<td>Person 2</td>
+<td>jane.person2@email.com</td>
+<td>https://linkedin.com/in/janeperson2</td>
+<td>https://example.com/janeperson2.jpg</td>
+<td>janeperson2#5678</td>
+<td>Experienced marketer with a focus on digital s...</td>
+<td>2023-02-15</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Alice</td>
+<td>Person 3</td>
+<td>alice.person3@email.com</td>
+<td>https://linkedin.com/in/aliceperson3</td>
+<td>https://example.com/aliceperson3.jpg</td>
+<td>aliceperson3#9876</td>
+<td>Graphic designer with a flair for creativity.</td>
+<td>2023-03-10</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Bob</td>
+<td>Person 4</td>
+<td>bob.person4@email.com</td>
+<td>https://linkedin.com/in/bobperson4</td>
+<td>https://example.com/bobperson4.jpg</td>
+<td>bobperson4#4321</td>
+<td>Data analyst passionate about deriving insight...</td>
+<td>2023-04-20</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>Charlie</td>
+<td>Person 5</td>
+<td>charlie.person5@email.com</td>
+<td>https://linkedin.com/in/charlieperson5</td>
+<td>https://example.com/charlieperson5.jpg</td>
+<td>charlieperson5#8765</td>
+<td>Mobile app developer specializing in iOS devel...</td>
+<td>2023-05-05</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>6</td>
+<td>Eva</td>
+<td>Person 6</td>
+<td>eva.person6@email.com</td>
+<td>https://linkedin.com/in/evaperson6</td>
+<td>https://example.com/evaperson6.jpg</td>
+<td>evaperson6#2468</td>
+<td>Cybersecurity enthusiast with a focus on ethic...</td>
+<td>2023-06-30</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>7</td>
+<td>David</td>
+<td>Person 7</td>
+<td>david.person7@email.com</td>
+<td>https://linkedin.com/in/davidperson7</td>
+<td>https://example.com/davidperson7.jpg</td>
+<td>davidperson7#1357</td>
+<td>Content writer passionate about storytelling.</td>
+<td>2023-07-15</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>8</td>
+<td>Grace</td>
+<td>Person 8</td>
+<td>grace.person8@email.com</td>
+<td>https://linkedin.com/in/graceperson8</td>
+<td>https://example.com/graceperson8.jpg</td>
+<td>graceperson8#9753</td>
+<td>Language enthusiast exploring the world of lin...</td>
+<td>2023-08-25</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">8</td>
+<td>9</td>
+<td>Frank</td>
+<td>Person 9</td>
+<td>frank.person9@email.com</td>
+<td>https://linkedin.com/in/frankperson9</td>
+<td>https://example.com/frankperson9.jpg</td>
+<td>frankperson9#3142</td>
+<td>Database administrator ensuring efficient data...</td>
+<td>2023-09-10</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">9</td>
+<td>10</td>
+<td>Olivia</td>
+<td>Person 10</td>
+<td>olivia.person10@email.com</td>
+<td>https://linkedin.com/in/oliviaperson10</td>
+<td>https://example.com/oliviaperson10.jpg</td>
+<td>oliviaperson10#2468</td>
+<td>Digital marketing expert with a passion for on...</td>
+<td>2023-10-05</td>
+</tr>
 </tbody>
 </table>
 
@@ -3443,41 +3560,10 @@ Ignoring and moving on.</code></pre>
 </section>
 <section id="skills-table" class="level3">
 <h3 class="anchored" data-anchor-id="skills-table">Skills table</h3>
-<p>The <em>skills</em> table contains elements that describe …</p>
+<p>The <em>skills</em> table contains elements that describe information related to various skills. Each skill is uniquely identified by an integer ID. The fields of name, description, and tag are mandatory, ensuring that they cannot be null. The “name” field represents the title or name of the skill, “description” provides a detailed explanation of the skill, and “tag” categorizes the skill into a specific grouping. Optional details include a URL for additional resources related to the skill and an indication of the time commitment required to acquire or master the skill. The “url” and “time_commitment” fields are allowed to default to null, providing flexibility in recording supplementary information about the skill.</p>
 <p>Below is a list of data in the <em>skills</em> table.</p>
-</section>
-<section id="roles-table" class="level3">
-<h3 class="anchored" data-anchor-id="roles-table">Roles table</h3>
-<p>The <em>roles</em> table contains elements that describe …</p>
-<p>Below is a list of data in the <em>roles</em> table.</p>
-</section>
-</section>
-<section id="sample-queries" class="level2">
-<h2 class="anchored" data-anchor-id="sample-queries">Sample queries</h2>
-<p>Let’s explore the database!</p>
-</section>
-<section id="list-skill-names-tags-and-descriptions-ordered-by-name" class="level1">
-<h1>List skill names, tags, and descriptions ordered by name</h1>
-<p>(here a sample query)</p>
-<div class="cell" data-execution_count="8">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>sql <span class="op">=</span> <span class="ss">f&quot;&quot;&quot;</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ss">select * from people</span></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ss">&quot;&quot;&quot;</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</div>
-<p>(and here is a sample result from the query)</p>
-<div class="cell" data-execution_count="9">
-<div class="cell-output cell-output-stdout">
-<pre><code>An error occurred:
-
-(pymysql.err.ProgrammingError) (1146, &quot;Table &#39;23FA_hr_menberuy.people&#39; doesn&#39;t exist&quot;)
-[SQL: 
-select * from people
-]
-(Background on this error at: https://sqlalche.me/e/20/f405)
-
-Ignoring and moving on.</code></pre>
-</div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div class="cell" data-execution_count="6">
+<div class="cell-output cell-output-display" data-execution_count="20">
 <div>
 
 
@@ -3485,15 +3571,165 @@ Ignoring and moving on.</code></pre>
 <thead>
 <tr class="header">
 <th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">description</th>
+<th data-quarto-table-cell-role="th">tag</th>
+<th data-quarto-table-cell-role="th">url</th>
+<th data-quarto-table-cell-role="th">time_commitment</th>
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>Frontend Development</td>
+<td>Creating user interfaces and experiences for w...</td>
+<td>Skill 1</td>
+<td>https://example.com/frontend</td>
+<td>6 months</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>Machine Learning</td>
+<td>Building models and algorithms that enable com...</td>
+<td>Skill 2</td>
+<td>https://example.com/machinelearning</td>
+<td>1 year</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Digital Marketing</td>
+<td>Promoting products or services using digital c...</td>
+<td>Skill 3</td>
+<td>https://example.com/digitalmarketing</td>
+<td>8 months</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Mobile App Development</td>
+<td>Developing applications for smartphones and ta...</td>
+<td>Skill 4</td>
+<td>https://example.com/mobileappdev</td>
+<td>1.5 years</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>Graphic Animation</td>
+<td>Creating animated graphics and visual effects ...</td>
+<td>Skill 5</td>
+<td>https://example.com/graphicanimation</td>
+<td>1 year</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>6</td>
+<td>Cybersecurity</td>
+<td>Protecting computer systems, networks, and dat...</td>
+<td>Skill 6</td>
+<td>https://example.com/cybersecurity</td>
+<td>2 years</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">6</td>
+<td>7</td>
+<td>Content Writing</td>
+<td>Producing written content for websites, blogs,...</td>
+<td>Skill 7</td>
+<td>https://example.com/contentwriting</td>
+<td>6 months</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">7</td>
+<td>8</td>
+<td>Database Management</td>
+<td>Designing, implementing, and maintaining datab...</td>
+<td>Skill 8</td>
+<td>https://example.com/dbmanagement</td>
+<td>1.5 years</td>
+</tr>
 </tbody>
 </table>
 
 </div>
 </div>
 </div>
+</section>
+<section id="roles-table" class="level3">
+<h3 class="anchored" data-anchor-id="roles-table">Roles table</h3>
+<p>The <em>roles</em> table contains elements that describe different roles or positions. Each role is uniquely identified by an integer ID. The fields of “name” and “sort_priority” are mandatory, ensuring that they cannot be null. The “name” field represents the title or name of the role, providing a descriptive label for the role. The “sort_priority” field is an integer used to establish an order for sorting roles, allowing for a structured arrangement of roles based on their priority or significance. This table facilitates the organization and categorization of distinct roles within a system or organization.</p>
+<p>Below is a list of data in the <em>roles</em> table.</p>
+<div class="cell" data-execution_count="7">
+<div class="cell-output cell-output-display" data-execution_count="21">
+<div>
+
+
+<table class="dataframe table table-sm table-striped small" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">name</th>
+<th data-quarto-table-cell-role="th">sort_priority</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>Designer</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>2</td>
+<td>Developer</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>3</td>
+<td>Recruit</td>
+<td>30</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>4</td>
+<td>Team Lead</td>
+<td>40</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>5</td>
+<td>Boss</td>
+<td>50</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">5</td>
+<td>6</td>
+<td>Mentor</td>
+<td>60</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+</section>
+<section id="sample-queries" class="level2">
+<h2 class="anchored" data-anchor-id="sample-queries">Sample queries</h2>
+<p>Let’s explore the database!</p>
+<section id="list-skill-names-tags-and-descriptions-ordered-by-name" class="level3">
+<h3 class="anchored" data-anchor-id="list-skill-names-tags-and-descriptions-ordered-by-name">List skill names, tags, and descriptions ordered by name</h3>
+<p>(here a sample query)</p>
+<p>(and here is a sample result from the query)</p>
+</section>
 <section id="list-people-names-and-email-addresses-ordered-by-last_name" class="level3">
 <h3 class="anchored" data-anchor-id="list-people-names-and-email-addresses-ordered-by-last_name">List people names and email addresses ordered by last_name</h3>
 </section>
@@ -3518,10 +3754,10 @@ Ignoring and moving on.</code></pre>
 <section id="list-ids-and-names-of-unused-roles" class="level3">
 <h3 class="anchored" data-anchor-id="list-ids-and-names-of-unused-roles">List ids and names of unused roles</h3>
 </section>
+</section>
 <section id="reflection" class="level2">
 <h2 class="anchored" data-anchor-id="reflection">Reflection</h2>
 <p>(Write a paragraph expressing your thoughts, feelings, and insights about your experience with this assignment. Pause and breath before writing - I’m trying to encourage critical thinking and self-awareness while allowing you to explore the connections between theory and practice. And yes, delete this paragraph.)</p>
-</section>
 </section>
 
 </main>

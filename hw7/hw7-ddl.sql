@@ -170,6 +170,7 @@ INSERT INTO peopleskills (skill_id, people_id, date_acquired) VALUES
 # Section 8
 # Create roles( id, name, sort_priority )
 # sort_priority is an integer and is used to provide an order for sorting roles
+
 CREATE TABLE roles (
     id INT PRIMARY KEY,
     name VARCHAR(255) NOT NULL,

@@ -10,10 +10,6 @@ format:
         code-copy: true
 ---
 
-(include a brief description of what is in this document)
-
-(Please clean up any comments that I included.  This is a scaffold document.)
-
 GITHUB URL:  <https://github.com/cmsc-vcu/cmsc508-fa2023-hw7-OrganicCompiler/tree/main>
 
 ```{python}
@@ -95,31 +91,65 @@ except Exception as e:
 
 (briefly describe the project and the database)
 
-## Crows-foot diagram
+## Crows-Foot Diagram
 
-(add a description of the diagram and what the reader is seeing.)
+This ERD represents a relational database schema for managing information about people, their roles, and acquired skills. The key entities include "People," each uniquely identified by an ID, with attributes such as name, contact information, and date of joining. People can hold multiple roles, as depicted by the "PeopleRoles" relationship, where roles have unique IDs and associated names and priorities. Additionally, people can acquire various skills, illustrated by the "PeopleSkills" relationship, connecting individuals to skills with unique IDs, names, descriptions, and associated details. The diagram emphasizes the relationships between people, roles, and skills, providing a comprehensive view of how these entities interconnect in the database schema.
 
 ```{mermaid}
 erDiagram
-    CUSTOMER ||--o{ ORDER : places
-    CUSTOMER }|..|{ DELIVERY-ADDRESS : uses
-    CUSTOMER{
-        int id
+    PEOPLE {
+        int id PK
         string first_name
         string last_name
+        string email
+        string linkedin_url
+        string headshot_url
+        string discord_handle
+        string brief_bio
+        string date_joined
     }
-    DELIVERY-ADDRESS {
-        int id
+
+    PEOPLEROLES {
+        int id PK
+        int people_id FK
+        int role_id FK
+        string date_assigned
     }
+
+    PEOPLESKILLS {
+        int id PK
+        int skill_id FK
+        int people_id FK
+        string date_acquired
+    }
+
+    ROLES {
+        int id PK
+        string name
+        inr sort_priority
+    }
+
+    SKILLS {
+        int id PK
+        string name
+        string description
+        string tag
+        string url
+        string time_commitment
+    }
+
+    SKILLS ||--|{ PEOPLESKILLS: uses
+    PEOPLE ||--|{ PEOPLESKILLS: acquires
+
+    PEOPLE ||--|{ PEOPLEROLES: holds
+    ROLES ||--|{ PEOPLEROLES: has
 ```
 
-## Examples of data in the database
-
-For the people, skills, and roles tables, provide a description of each table and it's contents. Then provide a listing of the entire table.
+## Data in the Users Database
 
 ### People table
 
-The *people* table contains elements that describe ... 
+The *people* table contains elements that describe individuals. Each person is identified by a unique integer ID, and their last name is a required field, ensuring that it cannot be null. Other optional details include the person's first name, email, LinkedIn URL, headshot URL, Discord handle, and a brief biography. These details allow for a comprehensive representation of an individual's profile. Additionally, the table records the date when each person joined, with this date being a mandatory field to ensure completeness in tracking the timeline of individuals' memberships or affiliations.
 
 Below is a list of data in the *people* table.
 
@@ -129,7 +159,7 @@ Below is a list of data in the *people* table.
 sql = f"""
 select * from people;
 """
-## Add code to list roles table here
+
 try:
     df = pd.read_sql(sql,cnx)
     df
@@ -142,51 +172,17 @@ df
 
 ### Skills table
 
-The *skills* table contains elements that describe ... 
+The *skills* table contains elements that describe information related to various skills. Each skill is uniquely identified by an integer ID. The fields of name, description, and tag are mandatory, ensuring that they cannot be null. The "name" field represents the title or name of the skill, "description" provides a detailed explanation of the skill, and "tag" categorizes the skill into a specific grouping. Optional details include a URL for additional resources related to the skill and an indication of the time commitment required to acquire or master the skill. The "url" and "time_commitment" fields are allowed to default to null, providing flexibility in recording supplementary information about the skill.
 
 Below is a list of data in the *skills* table.
 
 ```{python}
 #| echo: false
 #| eval: true
-
-## Add code to list roles table here
-```
-
-### Roles table
-
-The *roles* table contains elements that describe ... 
-
-Below is a list of data in the *roles* table.
-
-```{python}
-#| echo: false
-#| eval: true
-
-## Add code to list roles table here
-```
-
-
-## Sample queries
-
-Let's explore the database!
-
-# List skill names, tags, and descriptions ordered by name
-
-(here a sample query)
-
-```{python}
 sql = f"""
-select * from people
+select * from skills;
 """
-```
 
-
-(and here is a sample result from the query)
-
-```{python}
-#| echo: false
-#| eval: true
 try:
     df = pd.read_sql(sql,cnx)
     df
@@ -195,7 +191,44 @@ except Exception as e:
     print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
     df = pd.DataFrame()
 df
+```
 
+### Roles table
+
+The *roles* table contains elements that describe different roles or positions. Each role is uniquely identified by an integer ID. The fields of "name" and "sort_priority" are mandatory, ensuring that they cannot be null. The "name" field represents the title or name of the role, providing a descriptive label for the role. The "sort_priority" field is an integer used to establish an order for sorting roles, allowing for a structured arrangement of roles based on their priority or significance. This table facilitates the organization and categorization of distinct roles within a system or organization.
+
+Below is a list of data in the *roles* table.
+
+```{python}
+#| echo: false
+#| eval: true
+sql = f"""
+select * from roles;
+"""
+
+try:
+    df = pd.read_sql(sql,cnx)
+    df
+except Exception as e:
+    message = str(e)
+    print(f"An error occurred:\n\n{message}\n\nIgnoring and moving on.")
+    df = pd.DataFrame()
+df
+```
+
+
+## Sample queries
+
+Let's explore the database!
+
+### List skill names, tags, and descriptions ordered by name
+
+```{python}
+```
+
+```{python}
+#| echo: false
+#| eval: true
 ```
 
 
