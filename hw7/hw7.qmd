@@ -88,12 +88,10 @@ except Exception as e:
 ```
 
 ## Overview and description
-
-(briefly describe the project and the database)
+This document outlines the setup and usage of a database for managing resumes. The document includes a GitHub URL for accessing the repository. Within this document, Python scripts are used for establishing a database connection, checking databases, and providing sample queries. It also incorporates a Crows-Foot Diagram (Entity-Relationship Diagram) illustrating the relationships between tables (PEOPLE, ROLES, SKILLS, PEOPLEROLES, and PEOPLESKILLS). The document further details the structure and sample data of each table (People, Skills, Roles) and concludes with sample SQL queries to interact with the database. The aim of the project is to create a comprehensive database for managing resume-related information, allowing users to query and retrieve data efficiently.
 
 ## Crows-Foot Diagram
-
-This ERD represents a relational database schema for managing information about people, their roles, and acquired skills. The key entities include "People," each uniquely identified by an ID, with attributes such as name, contact information, and date of joining. People can hold multiple roles, as depicted by the "PeopleRoles" relationship, where roles have unique IDs and associated names and priorities. Additionally, people can acquire various skills, illustrated by the "PeopleSkills" relationship, connecting individuals to skills with unique IDs, names, descriptions, and associated details. The diagram emphasizes the relationships between people, roles, and skills, providing a comprehensive view of how these entities interconnect in the database schema.
+This Entity-Relationship Diagram (ERD) outlines the connections between five tables: PEOPLE, ROLES, SKILLS, PEOPLEROLES, and PEOPLESKILLS. It reflects relationships where people can acquire skills (PEOPLESKILLS), hold roles (PEOPLEROLES), and various roles are associated with people. The PEOPLE table contains personal details, ROLES represents roles, and SKILLS stores information about different skills. Connecting lines show how these entities relate, with notations indicating the nature of these connections, such as people acquiring skills and holding roles.
 
 ```{mermaid}
 erDiagram
@@ -139,7 +137,7 @@ erDiagram
     }
 
     SKILLS ||--|{ PEOPLESKILLS: uses
-    PEOPLE ||--|{ PEOPLESKILLS: acquires
+    PEOPLE ||--o{ PEOPLESKILLS: acquires
 
     PEOPLE ||--|{ PEOPLEROLES: holds
     ROLES ||--|{ PEOPLEROLES: has
@@ -222,41 +220,115 @@ df
 Let's explore the database!
 
 ### List skill names, tags, and descriptions ordered by name
-
 ```{python}
+sql = f"""
+SELECT name, tag, description
+FROM skills
+ORDER BY name;
+"""
+df = pd.read_sql(sql,cnx)
+df
 ```
-
-```{python}
-#| echo: false
-#| eval: true
-```
-
 
 ### List people names and email addresses ordered by last_name
-
+```{python}
+sql = f"""
+SELECT first_name, last_name, email
+FROM people
+ORDER BY last_name;
+"""
+df = pd.read_sql(sql,cnx)
+df
+```
 
 ### List skill names of Person 1
-
+```{python}
+sql = f"""
+SELECT skills.name
+FROM peopleskills
+JOIN skills ON peopleskills.skill_id = skills.id
+WHERE peopleskills.people_id = 1;
+"""
+df = pd.read_sql(sql,cnx)
+df
+```
 
 ### List people names with Skill 6
-
+```{python}
+sql = f"""
+SELECT people.first_name, people.last_name
+FROM peopleskills
+JOIN skills ON peopleskills.skill_id = skills.id
+JOIN people ON peopleskills.people_id = people.id
+WHERE skills.id = 6;
+"""
+df = pd.read_sql(sql,cnx)
+df
+```
 
 ### List people with a DEVELOPER role
-
+```{python}
+sql = f"""
+SELECT people.first_name, people.last_name
+FROM peopleroles
+JOIN roles ON peopleroles.role_id = roles.id
+JOIN people ON peopleroles.people_id = people.id
+WHERE roles.name = 'DEVELOPER';
+"""
+df = pd.read_sql(sql,cnx)
+df
+```
 
 ### List names and email addresses of people without skills
-
+```{python}
+sql = f"""
+SELECT first_name, last_name, email
+FROM people
+WHERE id NOT IN (SELECT DISTINCT people_id FROM peopleskills);
+"""
+df = pd.read_sql(sql,cnx)
+df
+```
 
 ### List names and tags of unused skills
 
+```{python}
+sql = f"""
+SELECT name, tag
+FROM skills
+WHERE id NOT IN (SELECT DISTINCT skill_id FROM peopleskills);
+"""
+df = pd.read_sql(sql,cnx)
+df
+```
 
 ### List people names and skill names with the BOSS role
-
+```{python}
+sql = f"""
+SELECT people.first_name, people.last_name, skills.name as skill_name
+FROM peopleroles
+JOIN roles ON peopleroles.role_id = roles.id
+JOIN people ON peopleroles.people_id = people.id
+LEFT JOIN peopleskills ON peopleroles.people_id = peopleskills.people_id
+LEFT JOIN skills ON peopleskills.skill_id = skills.id
+WHERE roles.name = 'BOSS';
+"""
+df = pd.read_sql(sql,cnx)
+df
+```
 
 ### List ids and names of unused roles
-
+```{python}
+sql = f"""
+SELECT id, name
+FROM roles
+WHERE id NOT IN (SELECT DISTINCT role_id FROM peopleroles);
+"""
+df = pd.read_sql(sql,cnx)
+df
+```
 
 ## Reflection
-
-(Write a paragraph expressing your thoughts, feelings, and insights about your experience with this assignment.  Pause and breath before writing - I'm trying to encourage critical thinking and self-awareness while allowing you to explore the connections between theory and practice. And yes, delete this paragraph.)
-
+While doing this assignment I noticed how my understanding of relational algebra from the previous chapters in this course made it easier to write the MySQL quires to retrive information. I was also able to gain a more comprehensive understanding of joins. 
+A insight I had while doing this assignment was how to make a quick observation as to the cardinality of a relationship between entities. For instance, I noticed that the people_id attribute in peopleroles and peopleskills was not unique for each row and was able to deduce that this implied a 1 to many relationship with people to peopleroles/peopleskils.  
+Overall this assignment was fun and a good assignment to increase my MySQL profiency.  
